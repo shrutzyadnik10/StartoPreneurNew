@@ -1755,17 +1755,41 @@
           max-width: 160px;
         }
         .nav {
-          padding: 8px 0;
+          padding: 13px 0;
         }
       }
       @media (max-width: 420px) {
         .nav__logo-img {
-          height: 32px;
+          height: 35px;
           max-width: 200px;
         }
       }
       .nav--s .nav__logo-img {
         height: 50px;
+      }
+      @media (max-width: 640px) {
+        .ft-bottom {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .ft-addrs {
+          order: 1;
+        }
+
+        .ft-copy {
+          order: 2; /* this makes it LAST */
+          margin-top: 12px;
+        }
+      }
+      @media (max-width: 640px) {
+        .ft-addrs {
+          width: 100%;
+          padding-bottom: 12px;
+          margin-bottom: 12px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
       }
     </style>
   </head>
@@ -3697,7 +3721,13 @@
       <div class="container">
         <div class="ft-grid">
           <div>
-            <div class="ft-brand">StartoPreneur<span>360</span></div>
+            <div class="ft-brand">
+              <img
+                src="images/Startopreneur 360 Logo White.png"
+                alt="Startopreneur Logo"
+                class="footer-logo"
+              />
+            </div>
             <p class="ft-desc">
               India's Full-Stack Venture Studio. We build ventures, finance
               them, and validate them with a finance-first, equity-aligned
