@@ -295,14 +295,7 @@
         line-height: 1.7;
       }
       .back {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.88rem;
-        color: var(--teal);
-        font-weight: 500;
-        margin-bottom: 24px;
-        cursor: pointer;
+        display: None;
       }
 
       /* HERO */
@@ -1914,9 +1907,9 @@
           height: 30px;
         }
 
-        .back {
+        /* .back {
           font-size: 0.82rem;
-        }
+        } */
 
         .ey {
           font-size: 0.72rem;
@@ -2513,6 +2506,119 @@
           align-items: center;
         }
       }
+      .nav__mobile-group {
+        border-bottom: 1px solid var(--border-light);
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+      }
+
+      .nav__mobile-parent {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 10px;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+        font-family: "Outfit", sans-serif;
+      }
+
+      .nav__mobile-parent:hover {
+        background: var(--bg);
+        color: var(--navy);
+      }
+
+      .nav__mobile-arrow {
+        font-size: 0.9rem;
+        transition: transform var(--transition);
+      }
+
+      .nav__mobile-parent.is-open .nav__mobile-arrow {
+        transform: rotate(180deg);
+      }
+
+      .nav__mobile-submenu {
+        display: none;
+        padding: 4px 0 8px 12px;
+      }
+
+      .nav__mobile-submenu.is-open {
+        display: block;
+      }
+
+      .nav__mobile-sublink {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        cursor: pointer;
+      }
+
+      .nav__mobile-sublink:hover {
+        background: var(--bg);
+        color: var(--navy);
+      }
+      .pf-card.reveal {
+        opacity: 0;
+        transform: translateY(34px);
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s ease,
+          box-shadow var(--transition),
+          border-color var(--transition);
+        will-change: opacity, transform;
+      }
+
+      .pf-card.reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .pf-card.reveal {
+          transform: translateY(24px);
+          transition:
+            opacity 0.65s ease,
+            transform 0.65s ease;
+        }
+      }
+      .ins-card.reveal {
+        opacity: 0;
+        transform: translateY(34px);
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s ease,
+          box-shadow var(--transition),
+          border-color var(--transition);
+        will-change: opacity, transform;
+      }
+
+      .ins-card.reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .ins-card.reveal {
+          transform: translateY(24px);
+          transition:
+            opacity 0.65s ease,
+            transform 0.65s ease;
+        }
+      }
+      @media (max-width: 640px) {
+        .about-cards {
+          grid-template-columns: 1fr !important;
+          gap: 18px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2520,30 +2626,45 @@
     <nav class="nav" id="mainNav">
       <div class="nav__inner">
         <div class="nav__mobile-panel" id="mobileMenuPanel">
-          <span
-            class="nav__mobile-link"
-            onclick="
-              nav('portfolio');
-              closeMobileMenu();
-            "
-            >Portfolio</span
-          >
-          <span
-            class="nav__mobile-link"
-            onclick="
-              nav('how-we-build');
-              closeMobileMenu();
-            "
-            >How We Build</span
-          >
-          <span
-            class="nav__mobile-link"
-            onclick="
-              nav('apply-studio');
-              closeMobileMenu();
-            "
-            >Apply to Studio</span
-          >
+          <div class="nav__mobile-group">
+            <button
+              class="nav__mobile-parent"
+              type="button"
+              id="studioMobileToggle"
+              aria-expanded="false"
+            >
+              <span>The Studio</span>
+              <span class="nav__mobile-arrow">▾</span>
+            </button>
+
+            <div class="nav__mobile-submenu" id="studioMobileSubmenu">
+              <span
+                class="nav__mobile-sublink"
+                onclick="
+                  nav('portfolio');
+                  closeMobileMenu();
+                "
+                >Portfolio Companies</span
+              >
+              <span
+                class="nav__mobile-sublink"
+                onclick="
+                  nav('how-we-build');
+                  closeMobileMenu();
+                "
+                >How We Build</span
+              >
+              <span
+                class="nav__mobile-sublink"
+                onclick="
+                  nav('apply-studio');
+                  closeMobileMenu();
+                "
+                >Apply to Studio</span
+              >
+            </div>
+          </div>
+
           <span
             class="nav__mobile-link"
             onclick="
@@ -2576,6 +2697,7 @@
             "
             >Careers</span
           >
+
           <button
             class="nav__mobile-cta"
             onclick="
@@ -2899,19 +3021,25 @@
 
     <!-- ==================== PORTFOLIO ==================== -->
     <div class="page" id="pg-portfolio">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Our Work</div>
-          <h2 class="sh" style="font-size: clamp(2.4rem, 5vw, 3.4rem)">
+          <div class="ey reveal">Our Work</div>
+          <h2
+            class="sh reveal reveal-delay-1"
+            style="font-size: clamp(2.4rem, 5vw, 3.4rem)"
+          >
             Portfolio <em>& Partners</em>
           </h2>
         </div>
       </section>
-      <section style="padding: 40px 0 80px; background: white">
+
+      <section
+        style="padding: 40px 0 80px; background: white"
+        class="reveal reveal-delay-2"
+      >
         <div class="container">
-          <div class="pf-grid rv">
-            <div class="pf-card">
+          <div class="pf-grid">
+            <div class="pf-card reveal">
               <div class="pf-logo">B</div>
               <h4 class="pf-name">Biodeus Technologies</h4>
               <p class="pf-sector">Biotech / Contract Research</p>
@@ -2926,7 +3054,8 @@
                 >biodeustech.com →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-1">
               <div class="pf-logo">P</div>
               <h4 class="pf-name">Pakshimitra Poultry Tech</h4>
               <p class="pf-sector">AgriTech / Poultry</p>
@@ -2941,7 +3070,8 @@
                 >pakshimitra.com →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-2">
               <div class="pf-logo">D</div>
               <h4 class="pf-name">DocBot Pvt Ltd</h4>
               <p class="pf-sector">HealthTech / Health Kiosks</p>
@@ -2953,7 +3083,8 @@
                 >docbot.in →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-3">
               <div class="pf-logo">TRJ</div>
               <h4 class="pf-name">The Return Journey</h4>
               <p class="pf-sector">Wellness / Mental Health</p>
@@ -2968,7 +3099,8 @@
                 >thereturnjourney.com →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal">
               <div class="pf-logo">A</div>
               <h4 class="pf-name">Aguamenti Mine Water</h4>
               <p class="pf-sector">Infrastructure / Water</p>
@@ -2977,7 +3109,8 @@
                 years.
               </p>
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-1">
               <div class="pf-logo">T</div>
               <h4 class="pf-name">Tunwal E-Motors Ltd</h4>
               <p class="pf-sector">Electric Vehicles / BSE Listed</p>
@@ -2988,7 +3121,8 @@
                 >tunwal.com →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-2">
               <div class="pf-logo">TG</div>
               <h4 class="pf-name">TGISME Capital Advisors</h4>
               <p class="pf-sector">Capital Advisory / SME</p>
@@ -2996,7 +3130,8 @@
                 SME-focused capital advisory. Active fundraising partnership.
               </p>
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-3">
               <div class="pf-logo">SP</div>
               <h4 class="pf-name">SPPU Research Park Foundation</h4>
               <p class="pf-sector">University / Incubator</p>
@@ -3007,7 +3142,8 @@
                 >sppu-rpf.in →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal">
               <div class="pf-logo">L&P</div>
               <h4 class="pf-name">London & Partners</h4>
               <p class="pf-sector">International Partnership</p>
@@ -3021,7 +3157,8 @@
                 >londonandpartners.com →</a
               >
             </div>
-            <div class="pf-card">
+
+            <div class="pf-card reveal reveal-delay-1">
               <div class="pf-logo">V</div>
               <h4 class="pf-name">Vigorus AI (Chikitsa.io)</h4>
               <p class="pf-sector">HealthTech / AI</p>
@@ -3038,22 +3175,23 @@
     </div>
 
     <!-- ==================== HOW WE BUILD ==================== -->
+    <!-- ==================== HOW WE BUILD ==================== -->
     <div class="page" id="pg-how-we-build">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Venture Studio</div>
-          <h2 class="sh">How We <em>Build</em></h2>
-          <p class="sp">
+          <div class="ey reveal">Venture Studio</div>
+          <h2 class="sh reveal reveal-delay-1">How We <em>Build</em></h2>
+          <p class="sp reveal reveal-delay-2">
             From first conversation to institutional readiness. A systematic,
             finance-first approach to venture building.
           </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container">
-          <div class="hwb-flow rv">
-            <div class="hwb-step">
+          <div class="hwb-flow reveal reveal-delay-3">
+            <div class="hwb-step reveal">
               <div class="hwb-num">1</div>
               <div class="hwb-label">Discover</div>
               <p class="hwb-desc">
@@ -3061,7 +3199,8 @@
                 Alignment on vision and values.
               </p>
             </div>
-            <div class="hwb-step">
+
+            <div class="hwb-step reveal reveal-delay-1">
               <div class="hwb-num">2</div>
               <div class="hwb-label">Architect</div>
               <p class="hwb-desc">
@@ -3069,7 +3208,8 @@
                 governance framework, and compliance backbone.
               </p>
             </div>
-            <div class="hwb-step">
+
+            <div class="hwb-step reveal reveal-delay-2">
               <div class="hwb-num">3</div>
               <div class="hwb-label">Build & Scale</div>
               <p class="hwb-desc">
@@ -3077,7 +3217,8 @@
                 Prepare investor-grade reporting.
               </p>
             </div>
-            <div class="hwb-step">
+
+            <div class="hwb-step reveal reveal-delay-3">
               <div class="hwb-num">4</div>
               <div class="hwb-label">Capitalise</div>
               <p class="hwb-desc">
@@ -3086,10 +3227,12 @@
               </p>
             </div>
           </div>
-          <div style="margin-top: 48px; text-align: center" class="rv">
-            <h3 class="sh" style="font-size: 1.8rem">
+
+          <div style="margin-top: 48px; text-align: center" class="reveal">
+            <h3 class="sh reveal reveal-delay-1" style="font-size: 1.8rem">
               What makes our studio <em>different?</em>
             </h3>
+
             <div
               style="
                 display: grid;
@@ -3100,6 +3243,7 @@
               "
             >
               <div
+                class="reveal reveal-delay-1"
                 style="
                   padding: 24px;
                   background: var(--bg);
@@ -3130,7 +3274,9 @@
                   discipline.
                 </p>
               </div>
+
               <div
+                class="reveal reveal-delay-2"
                 style="
                   padding: 24px;
                   background: var(--bg);
@@ -3160,7 +3306,9 @@
                   to yours. No exit without outcomes.
                 </p>
               </div>
+
               <div
+                class="reveal reveal-delay-3"
                 style="
                   padding: 24px;
                   background: var(--bg);
@@ -3191,7 +3339,8 @@
                 </p>
               </div>
             </div>
-            <div style="margin-top: 40px">
+
+            <div class="reveal reveal-delay-4" style="margin-top: 40px">
               <button class="btn btn--p" onclick="nav('apply-studio')">
                 Apply to Studio →
               </button>
@@ -3202,22 +3351,25 @@
     </div>
 
     <!-- ==================== APPLY TO STUDIO (Universal Form) ==================== -->
+    <!-- ==================== APPLY TO STUDIO (Universal Form) ==================== -->
     <div class="page" id="pg-apply-studio">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('how-we-build')">← Back</span>
-          <div class="ey">Apply</div>
-          <h2 class="sh">Work with <em>the Studio</em></h2>
-          <p class="sp">
+          <div class="ey reveal">Apply</div>
+          <h2 class="sh reveal reveal-delay-1">
+            Work with <em>the Studio</em>
+          </h2>
+          <p class="sp reveal reveal-delay-2">
             Tell us about your venture and what you're looking for. We'll get
             back within 48 hours.
           </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container">
-          <div class="form rv">
-            <div class="form-full">
+          <div class="form reveal reveal-delay-3">
+            <div class="form-full reveal">
               <label>What are you looking for?</label>
               <select id="formType" onchange="toggleFormFields()">
                 <option value="">Select engagement type</option>
@@ -3233,45 +3385,48 @@
                 </option>
               </select>
             </div>
-            <div class="form-row">
+
+            <div class="form-row reveal reveal-delay-1">
               <div>
-                <label>Full Name *</label
-                ><input type="text" placeholder="Your name" />
+                <label>Full Name *</label>
+                <input type="text" placeholder="Your name" />
               </div>
               <div>
-                <label>Email *</label
-                ><input type="email" placeholder="you@company.com" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label>Phone</label
-                ><input type="tel" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div>
-                <label>Company Name *</label
-                ><input type="text" placeholder="Your company" />
+                <label>Email *</label>
+                <input type="email" placeholder="you@company.com" />
               </div>
             </div>
-            <div class="form-row">
+
+            <div class="form-row reveal reveal-delay-2">
               <div>
-                <label>Sector</label
-                ><input
+                <label>Phone</label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div>
+                <label>Company Name *</label>
+                <input type="text" placeholder="Your company" />
+              </div>
+            </div>
+
+            <div class="form-row reveal reveal-delay-3">
+              <div>
+                <label>Sector</label>
+                <input
                   type="text"
                   placeholder="e.g. HealthTech, AgriTech, CleanTech"
                 />
               </div>
               <div>
-                <label>Location</label
-                ><input type="text" placeholder="City, Country" />
+                <label>Location</label>
+                <input type="text" placeholder="City, Country" />
               </div>
             </div>
 
             <div id="fields-studio" style="display: none">
-              <div class="form-row">
+              <div class="form-row reveal reveal-delay-1">
                 <div>
-                  <label>Stage</label
-                  ><select>
+                  <label>Stage</label>
+                  <select>
                     <option>Ideation</option>
                     <option>MVP / Pre-Revenue</option>
                     <option>Early Revenue</option>
@@ -3279,25 +3434,26 @@
                   </select>
                 </div>
                 <div>
-                  <label>Are you open to equity partnership?</label
-                  ><select>
+                  <label>Are you open to equity partnership?</label>
+                  <select>
                     <option>Yes</option>
                     <option>Open to discussion</option>
                     <option>Not sure</option>
                   </select>
                 </div>
               </div>
-              <div class="form-full">
-                <label>What problem does your venture solve?</label
-                ><textarea placeholder="Describe in 2-3 lines"></textarea>
+
+              <div class="form-full reveal reveal-delay-2">
+                <label>What problem does your venture solve?</label>
+                <textarea placeholder="Describe in 2-3 lines"></textarea>
               </div>
             </div>
 
             <div id="fields-fundraise" style="display: none">
-              <div class="form-row">
+              <div class="form-row reveal reveal-delay-1">
                 <div>
-                  <label>Current Revenue (Annual)</label
-                  ><select>
+                  <label>Current Revenue (Annual)</label>
+                  <select>
                     <option>Pre-Revenue</option>
                     <option>Under ₹1 Crore</option>
                     <option>₹1-5 Crore</option>
@@ -3306,14 +3462,15 @@
                   </select>
                 </div>
                 <div>
-                  <label>Target Raise Amount</label
-                  ><input type="text" placeholder="e.g. ₹10 Crore" />
+                  <label>Target Raise Amount</label>
+                  <input type="text" placeholder="e.g. ₹10 Crore" />
                 </div>
               </div>
-              <div class="form-row">
+
+              <div class="form-row reveal reveal-delay-2">
                 <div>
-                  <label>Round Type</label
-                  ><select>
+                  <label>Round Type</label>
+                  <select>
                     <option>Seed</option>
                     <option>Pre-Series A</option>
                     <option>Series A</option>
@@ -3322,8 +3479,8 @@
                   </select>
                 </div>
                 <div>
-                  <label>Timeline</label
-                  ><select>
+                  <label>Timeline</label>
+                  <select>
                     <option>Immediate (0-3 months)</option>
                     <option>Near-term (3-6 months)</option>
                     <option>Planning (6-12 months)</option>
@@ -3333,10 +3490,10 @@
             </div>
 
             <div id="fields-advisory" style="display: none">
-              <div class="form-row">
+              <div class="form-row reveal reveal-delay-1">
                 <div>
-                  <label>Advisory Type</label
-                  ><select>
+                  <label>Advisory Type</label>
+                  <select>
                     <option>Fractional CFO</option>
                     <option>Transaction Structuring</option>
                     <option>Post-IPO / SEBI Compliance</option>
@@ -3346,8 +3503,8 @@
                   </select>
                 </div>
                 <div>
-                  <label>Engagement Duration</label
-                  ><select>
+                  <label>Engagement Duration</label>
+                  <select>
                     <option>Project-based</option>
                     <option>Retainer (monthly)</option>
                     <option>Not sure yet</option>
@@ -3356,13 +3513,14 @@
               </div>
             </div>
 
-            <div class="form-full">
-              <label>Anything else we should know?</label
-              ><textarea
+            <div class="form-full reveal reveal-delay-4">
+              <label>Anything else we should know?</label>
+              <textarea
                 placeholder="Additional context, links, deck URL..."
               ></textarea>
             </div>
-            <div class="form-submit">
+
+            <div class="form-submit reveal reveal-delay-4">
               <button
                 class="btn btn--p"
                 onclick="
@@ -3378,7 +3536,6 @@
         </div>
       </section>
     </div>
-
     <!-- ==================== INVESTOR INTEREST ==================== -->
     <div class="page" id="pg-investor-interest">
       <section class="pg-hero">
@@ -3473,23 +3630,24 @@
     </div>
 
     <!-- ==================== DIAGNOSTICS ==================== -->
+    <!-- ==================== DIAGNOSTICS ==================== -->
     <div class="page" id="pg-diagnostics">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Engine 3 · De-Risk</div>
-          <h2 class="sh">Diagnostic <em>Services</em></h2>
-          <p class="sp">
+          <div class="ey reveal">Engine 3 · De-Risk</div>
+          <h2 class="sh reveal reveal-delay-1">Diagnostic <em>Services</em></h2>
+          <p class="sp reveal reveal-delay-2">
             Scored, benchmarked assessments that turn assumptions into
             quantified intelligence.
           </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: var(--bg)">
         <div class="container">
-          <div class="diag-grid rv">
+          <div class="diag-grid">
             <div
-              class="diag-card"
+              class="diag-card reveal"
               onclick="
                 window.open(
                   'https://test.globalfinanceprofessionals.com/#login',
@@ -3504,7 +3662,11 @@
               </p>
               <span class="diag-card__cta">Start Assessment →</span>
             </div>
-            <div class="diag-card" onclick="nav('diag-fea')">
+
+            <div
+              class="diag-card reveal reveal-delay-1"
+              onclick="nav('diag-fea')"
+            >
               <h4 class="diag-card__title">Finance Excellence Assessment</h4>
               <p class="diag-card__desc">
                 Finance function maturity across MIS, controls, compliance,
@@ -3512,7 +3674,11 @@
               </p>
               <span class="diag-card__cta">Learn More →</span>
             </div>
-            <div class="diag-card" onclick="nav('diag-bea')">
+
+            <div
+              class="diag-card reveal reveal-delay-2"
+              onclick="nav('diag-bea')"
+            >
               <h4 class="diag-card__title">Business Excellence Assessment</h4>
               <p class="diag-card__desc">
                 18-area operational assessment benchmarked against industry
@@ -3520,7 +3686,11 @@
               </p>
               <span class="diag-card__cta">Learn More →</span>
             </div>
-            <div class="diag-card" onclick="nav('diag-esg')">
+
+            <div
+              class="diag-card reveal reveal-delay-3"
+              onclick="nav('diag-esg')"
+            >
               <h4 class="diag-card__title">ESG & Sustainability Assessment</h4>
               <p class="diag-card__desc">
                 GRI/BRSR aligned readiness for IPO-bound and export companies.
@@ -3533,32 +3703,38 @@
     </div>
 
     <!-- DIAG: FEA -->
+    <!-- DIAG: FEA -->
     <div class="page" id="pg-diag-fea">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('diagnostics')">← Diagnostics</span>
-          <div class="ey">Financial Diagnostic</div>
-          <h2 class="sh">Finance Excellence <em>Assessment</em></h2>
-          <p class="sp">Is your finance function investment-grade?</p>
+          <div class="ey reveal">Financial Diagnostic</div>
+          <h2 class="sh reveal reveal-delay-1">
+            Finance Excellence <em>Assessment</em>
+          </h2>
+          <p class="sp reveal reveal-delay-2">
+            Is your finance function investment-grade?
+          </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container" style="max-width: 920px">
-          <div class="dd-grid rv">
-            <div>
+          <div class="dd-grid">
+            <div class="reveal reveal-delay-3">
               <div class="dd-label">What It Measures</div>
               <div class="dd-dims">
-                <span class="dd-dim">MIS Quality</span
-                ><span class="dd-dim">Reporting</span
-                ><span class="dd-dim">Budgeting</span
-                ><span class="dd-dim">Controls</span
-                ><span class="dd-dim">Compliance</span
-                ><span class="dd-dim">Treasury</span
-                ><span class="dd-dim">Tax Planning</span
-                ><span class="dd-dim">Audit Readiness</span>
+                <span class="dd-dim">MIS Quality</span>
+                <span class="dd-dim">Reporting</span>
+                <span class="dd-dim">Budgeting</span>
+                <span class="dd-dim">Controls</span>
+                <span class="dd-dim">Compliance</span>
+                <span class="dd-dim">Treasury</span>
+                <span class="dd-dim">Tax Planning</span>
+                <span class="dd-dim">Audit Readiness</span>
               </div>
             </div>
-            <div>
+
+            <div class="reveal reveal-delay-4">
               <div class="dd-label">Who It's For</div>
               <p class="dd-content">
                 CFOs upgrading finance functions. Founders preparing for
@@ -3567,29 +3743,33 @@
               </p>
             </div>
           </div>
-          <div class="dd-benefits rv">
-            <div class="dd-benefit">
+
+          <div class="dd-benefits">
+            <div class="dd-benefit reveal">
               <h4>Identify Gaps Early</h4>
               <p>
                 Reveals finance function weaknesses before investors discover
                 them during due diligence.
               </p>
             </div>
-            <div class="dd-benefit">
+
+            <div class="dd-benefit reveal reveal-delay-1">
               <h4>Maturity Scorecard</h4>
               <p>
                 Crawl-walk-run-fly progression with red/amber/green ratings per
                 dimension.
               </p>
             </div>
-            <div class="dd-benefit">
+
+            <div class="dd-benefit reveal reveal-delay-2">
               <h4>Prioritised Roadmap</h4>
               <p>
                 Clear action plan ranked by impact. Know exactly what to fix
                 first.
               </p>
             </div>
-            <div class="dd-benefit">
+
+            <div class="dd-benefit reveal reveal-delay-3">
               <h4>Boardroom-Ready</h4>
               <p>
                 Delivered as a presentation your board and investors can
@@ -3597,8 +3777,9 @@
               </p>
             </div>
           </div>
+
           <div
-            class="form rv"
+            class="form reveal reveal-delay-4"
             style="
               margin-top: 40px;
               padding: 40px;
@@ -3606,27 +3787,32 @@
               border-radius: var(--radius-lg);
             "
           >
-            <h3 class="sh" style="font-size: 1.6rem; margin-bottom: 20px">
+            <h3
+              class="sh reveal"
+              style="font-size: 1.6rem; margin-bottom: 20px"
+            >
               Request <em>Assessment</em>
             </h3>
-            <div class="form-row">
+
+            <div class="form-row reveal reveal-delay-1">
               <div>
-                <label>Name *</label
-                ><input type="text" placeholder="Your name" />
+                <label>Name *</label>
+                <input type="text" placeholder="Your name" />
               </div>
               <div>
-                <label>Email *</label
-                ><input type="email" placeholder="you@company.com" />
+                <label>Email *</label>
+                <input type="email" placeholder="you@company.com" />
               </div>
             </div>
-            <div class="form-row">
+
+            <div class="form-row reveal reveal-delay-2">
               <div>
-                <label>Company</label
-                ><input type="text" placeholder="Company name" />
+                <label>Company</label>
+                <input type="text" placeholder="Company name" />
               </div>
               <div>
-                <label>Revenue Range</label
-                ><select>
+                <label>Revenue Range</label>
+                <select>
                   <option>Pre-Revenue</option>
                   <option>Under ₹1 Cr</option>
                   <option>₹1-10 Cr</option>
@@ -3635,13 +3821,15 @@
                 </select>
               </div>
             </div>
-            <div class="form-full">
-              <label>What prompted this assessment?</label
-              ><textarea
+
+            <div class="form-full reveal reveal-delay-3">
+              <label>What prompted this assessment?</label>
+              <textarea
                 placeholder="e.g. Preparing for fundraise, IPO readiness, finance function upgrade..."
               ></textarea>
             </div>
-            <div class="form-submit">
+
+            <div class="form-submit reveal reveal-delay-4">
               <button
                 class="btn btn--p"
                 onclick="
@@ -3659,269 +3847,302 @@
     </div>
 
     <!-- DIAG: BEA -->
-    <div class="page" id="pg-diag-bea">
-      <section class="pg-hero">
-        <div class="container">
-          <span class="back" onclick="nav('diagnostics')">← Diagnostics</span>
-          <div class="ey">Operational Diagnostic</div>
-          <h2 class="sh">Business Excellence <em>Assessment</em></h2>
-          <p class="sp">
-            18-area operational assessment benchmarked against industry best.
+   <!-- DIAG: BEA -->
+<div class="page" id="pg-diag-bea">
+  <section class="pg-hero reveal">
+    <div class="container">
+      <div class="ey reveal">Operational Diagnostic</div>
+      <h2 class="sh reveal reveal-delay-1">
+        Business Excellence <em>Assessment</em>
+      </h2>
+      <p class="sp reveal reveal-delay-2">
+        18-area operational assessment benchmarked against industry best.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 40px 0 80px; background: white">
+    <div class="container" style="max-width: 920px">
+      <div class="dd-grid">
+        <div class="reveal reveal-delay-3">
+          <div class="dd-label">What It Measures</div>
+          <div class="dd-dims">
+            <span class="dd-dim">Operations</span>
+            <span class="dd-dim">Sales</span>
+            <span class="dd-dim">HR</span>
+            <span class="dd-dim">Supply Chain</span>
+            <span class="dd-dim">Technology</span>
+            <span class="dd-dim">Quality</span>
+            <span class="dd-dim">CX</span>
+            <span class="dd-dim">+ 11 more</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-4">
+          <div class="dd-label">Who It's For</div>
+          <p class="dd-content">
+            Mid-market companies scaling up. MSMEs preparing for
+            institutional investment. Businesses seeking structured
+            transformation.
           </p>
         </div>
-      </section>
-      <section style="padding: 40px 0 80px; background: white">
-        <div class="container" style="max-width: 920px">
-          <div class="dd-grid rv">
-            <div>
-              <div class="dd-label">What It Measures</div>
-              <div class="dd-dims">
-                <span class="dd-dim">Operations</span
-                ><span class="dd-dim">Sales</span><span class="dd-dim">HR</span
-                ><span class="dd-dim">Supply Chain</span
-                ><span class="dd-dim">Technology</span
-                ><span class="dd-dim">Quality</span
-                ><span class="dd-dim">CX</span
-                ><span class="dd-dim">+ 11 more</span>
-              </div>
-            </div>
-            <div>
-              <div class="dd-label">Who It's For</div>
-              <p class="dd-content">
-                Mid-market companies scaling up. MSMEs preparing for
-                institutional investment. Businesses seeking structured
-                transformation.
-              </p>
-            </div>
+      </div>
+
+      <div class="dd-benefits">
+        <div class="dd-benefit reveal">
+          <h4>Full Operational X-Ray</h4>
+          <p>
+            18 areas assessed. No department overlooked. Complete picture of
+            operational maturity.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-1">
+          <h4>Industry Benchmarking</h4>
+          <p>
+            Your scores compared against sector best-performers. Know where
+            you stand.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-2">
+          <h4>Quick Wins Identified</h4>
+          <p>
+            Immediate improvements separated from structural changes.
+            Prioritised by impact.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-3">
+          <h4>Transformation Roadmap</h4>
+          <p>
+            Phased plan with timelines, owners, and measurable milestones.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="form reveal reveal-delay-4"
+        style="
+          margin-top: 40px;
+          padding: 40px;
+          background: var(--bg);
+          border-radius: var(--radius-lg);
+        "
+      >
+        <h3 class="sh reveal" style="font-size: 1.6rem; margin-bottom: 20px">
+          Request <em>Assessment</em>
+        </h3>
+
+        <div class="form-row reveal reveal-delay-1">
+          <div>
+            <label>Name *</label>
+            <input type="text" placeholder="Your name" />
           </div>
-          <div class="dd-benefits rv">
-            <div class="dd-benefit">
-              <h4>Full Operational X-Ray</h4>
-              <p>
-                18 areas assessed. No department overlooked. Complete picture of
-                operational maturity.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Industry Benchmarking</h4>
-              <p>
-                Your scores compared against sector best-performers. Know where
-                you stand.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Quick Wins Identified</h4>
-              <p>
-                Immediate improvements separated from structural changes.
-                Prioritised by impact.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Transformation Roadmap</h4>
-              <p>
-                Phased plan with timelines, owners, and measurable milestones.
-              </p>
-            </div>
-          </div>
-          <div
-            class="form rv"
-            style="
-              margin-top: 40px;
-              padding: 40px;
-              background: var(--bg);
-              border-radius: var(--radius-lg);
-            "
-          >
-            <h3 class="sh" style="font-size: 1.6rem; margin-bottom: 20px">
-              Request <em>Assessment</em>
-            </h3>
-            <div class="form-row">
-              <div>
-                <label>Name *</label
-                ><input type="text" placeholder="Your name" />
-              </div>
-              <div>
-                <label>Email *</label
-                ><input type="email" placeholder="you@company.com" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label>Company</label
-                ><input type="text" placeholder="Company name" />
-              </div>
-              <div>
-                <label>Employee Count</label
-                ><select>
-                  <option>1-10</option>
-                  <option>10-50</option>
-                  <option>50-200</option>
-                  <option>200-500</option>
-                  <option>500+</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-full">
-              <label>Key areas of concern</label
-              ><textarea
-                placeholder="e.g. Operations bottleneck, scaling challenges, quality issues..."
-              ></textarea>
-            </div>
-            <div class="form-submit">
-              <button
-                class="btn btn--p"
-                onclick="
-                  alert(
-                    'Thank you! We\'ll scope the engagement within 48 hours.',
-                  )
-                "
-              >
-                Request Assessment →
-              </button>
-            </div>
+          <div>
+            <label>Email *</label>
+            <input type="email" placeholder="you@company.com" />
           </div>
         </div>
-      </section>
+
+        <div class="form-row reveal reveal-delay-2">
+          <div>
+            <label>Company</label>
+            <input type="text" placeholder="Company name" />
+          </div>
+          <div>
+            <label>Employee Count</label>
+            <select>
+              <option>1-10</option>
+              <option>10-50</option>
+              <option>50-200</option>
+              <option>200-500</option>
+              <option>500+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-full reveal reveal-delay-3">
+          <label>Key areas of concern</label>
+          <textarea
+            placeholder="e.g. Operations bottleneck, scaling challenges, quality issues..."
+          ></textarea>
+        </div>
+
+        <div class="form-submit reveal reveal-delay-4">
+          <button
+            class="btn btn--p"
+            onclick="
+              alert(
+                'Thank you! We\'ll scope the engagement within 48 hours.',
+              )
+            "
+          >
+            Request Assessment →
+          </button>
+        </div>
+      </div>
     </div>
+  </section>
+</div>
 
     <!-- DIAG: ESG -->
-    <div class="page" id="pg-diag-esg">
-      <section class="pg-hero">
-        <div class="container">
-          <span class="back" onclick="nav('diagnostics')">← Diagnostics</span>
-          <div class="ey">ESG Diagnostic</div>
-          <h2 class="sh">ESG & Sustainability <em>Assessment</em></h2>
-          <p class="sp">
-            ESG is a capital markets requirement. GRI/BRSR aligned readiness.
+  <!-- DIAG: ESG -->
+<div class="page" id="pg-diag-esg">
+  <section class="pg-hero reveal">
+    <div class="container">
+      <div class="ey reveal">ESG Diagnostic</div>
+      <h2 class="sh reveal reveal-delay-1">
+        ESG & Sustainability <em>Assessment</em>
+      </h2>
+      <p class="sp reveal reveal-delay-2">
+        ESG is a capital markets requirement. GRI/BRSR aligned readiness.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding: 40px 0 80px; background: white">
+    <div class="container" style="max-width: 920px">
+      <div class="dd-grid">
+        <div class="reveal reveal-delay-3">
+          <div class="dd-label">What It Measures</div>
+          <div class="dd-dims">
+            <span class="dd-dim">Carbon & Energy</span>
+            <span class="dd-dim">Waste</span>
+            <span class="dd-dim">Labour</span>
+            <span class="dd-dim">Diversity</span>
+            <span class="dd-dim">Community</span>
+            <span class="dd-dim">Board Structure</span>
+            <span class="dd-dim">Ethics</span>
+          </div>
+        </div>
+
+        <div class="reveal reveal-delay-4">
+          <div class="dd-label">Who It's For</div>
+          <p class="dd-content">
+            IPO-bound companies. PE/VC investees. Export businesses entering
+            EU/US markets with ESG compliance requirements.
           </p>
         </div>
-      </section>
-      <section style="padding: 40px 0 80px; background: white">
-        <div class="container" style="max-width: 920px">
-          <div class="dd-grid rv">
-            <div>
-              <div class="dd-label">What It Measures</div>
-              <div class="dd-dims">
-                <span class="dd-dim">Carbon & Energy</span
-                ><span class="dd-dim">Waste</span
-                ><span class="dd-dim">Labour</span
-                ><span class="dd-dim">Diversity</span
-                ><span class="dd-dim">Community</span
-                ><span class="dd-dim">Board Structure</span
-                ><span class="dd-dim">Ethics</span>
-              </div>
-            </div>
-            <div>
-              <div class="dd-label">Who It's For</div>
-              <p class="dd-content">
-                IPO-bound companies. PE/VC investees. Export businesses entering
-                EU/US markets with ESG compliance requirements.
-              </p>
-            </div>
+      </div>
+
+      <div class="dd-benefits">
+        <div class="dd-benefit reveal">
+          <h4>Compliance Score</h4>
+          <p>
+            Quantified ESG readiness against GRI/BRSR standards. Not
+            opinions — scores.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-1">
+          <h4>Regulatory Alignment</h4>
+          <p>
+            Mapped to current and upcoming ESG regulations for your target
+            markets.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-2">
+          <h4>Investor Confidence</h4>
+          <p>
+            ESG-ready companies attract 20-30% more institutional interest.
+            This is your proof.
+          </p>
+        </div>
+
+        <div class="dd-benefit reveal reveal-delay-3">
+          <h4>Implementation Roadmap</h4>
+          <p>
+            Gap analysis with clear timeline for achieving compliance
+            milestones.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="form reveal reveal-delay-4"
+        style="
+          margin-top: 40px;
+          padding: 40px;
+          background: var(--bg);
+          border-radius: var(--radius-lg);
+        "
+      >
+        <h3 class="sh reveal" style="font-size: 1.6rem; margin-bottom: 20px">
+          Request <em>Assessment</em>
+        </h3>
+
+        <div class="form-row reveal reveal-delay-1">
+          <div>
+            <label>Name *</label>
+            <input type="text" placeholder="Your name" />
           </div>
-          <div class="dd-benefits rv">
-            <div class="dd-benefit">
-              <h4>Compliance Score</h4>
-              <p>
-                Quantified ESG readiness against GRI/BRSR standards. Not
-                opinions — scores.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Regulatory Alignment</h4>
-              <p>
-                Mapped to current and upcoming ESG regulations for your target
-                markets.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Investor Confidence</h4>
-              <p>
-                ESG-ready companies attract 20-30% more institutional interest.
-                This is your proof.
-              </p>
-            </div>
-            <div class="dd-benefit">
-              <h4>Implementation Roadmap</h4>
-              <p>
-                Gap analysis with clear timeline for achieving compliance
-                milestones.
-              </p>
-            </div>
-          </div>
-          <div
-            class="form rv"
-            style="
-              margin-top: 40px;
-              padding: 40px;
-              background: var(--bg);
-              border-radius: var(--radius-lg);
-            "
-          >
-            <h3 class="sh" style="font-size: 1.6rem; margin-bottom: 20px">
-              Request <em>Assessment</em>
-            </h3>
-            <div class="form-row">
-              <div>
-                <label>Name *</label
-                ><input type="text" placeholder="Your name" />
-              </div>
-              <div>
-                <label>Email *</label
-                ><input type="email" placeholder="you@company.com" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label>Company</label
-                ><input type="text" placeholder="Company name" />
-              </div>
-              <div>
-                <label>Why ESG now?</label
-                ><select>
-                  <option>IPO preparation</option>
-                  <option>PE/VC requirement</option>
-                  <option>EU/US market entry</option>
-                  <option>Board mandate</option>
-                  <option>Proactive compliance</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-full">
-              <label>Additional context</label
-              ><textarea
-                placeholder="Current ESG status, target markets, timeline..."
-              ></textarea>
-            </div>
-            <div class="form-submit">
-              <button
-                class="btn btn--p"
-                onclick="
-                  alert(
-                    'Thank you! We\'ll scope the engagement within 48 hours.',
-                  )
-                "
-              >
-                Request Assessment →
-              </button>
-            </div>
+          <div>
+            <label>Email *</label>
+            <input type="email" placeholder="you@company.com" />
           </div>
         </div>
-      </section>
+
+        <div class="form-row reveal reveal-delay-2">
+          <div>
+            <label>Company</label>
+            <input type="text" placeholder="Company name" />
+          </div>
+          <div>
+            <label>Why ESG now?</label>
+            <select>
+              <option>IPO preparation</option>
+              <option>PE/VC requirement</option>
+              <option>EU/US market entry</option>
+              <option>Board mandate</option>
+              <option>Proactive compliance</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-full reveal reveal-delay-3">
+          <label>Additional context</label>
+          <textarea
+            placeholder="Current ESG status, target markets, timeline..."
+          ></textarea>
+        </div>
+
+        <div class="form-submit reveal reveal-delay-4">
+          <button
+            class="btn btn--p"
+            onclick="
+              alert(
+                'Thank you! We\'ll scope the engagement within 48 hours.',
+              )
+            "
+          >
+            Request Assessment →
+          </button>
+        </div>
+      </div>
     </div>
+  </section>
+</div>
 
     <!-- ==================== INSIGHTS ==================== -->
+    <!-- ==================== INSIGHTS ==================== -->
     <div class="page" id="pg-insights">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Insights</div>
-          <h2 class="sh">The India Moment <em>@India2047</em></h2>
-          <p class="sp">
+          <div class="ey reveal">Insights</div>
+
+          <h2 class="sh reveal reveal-delay-1">
+            The India Moment <em>@India2047</em>
+          </h2>
+
+          <p class="sp reveal reveal-delay-2">
             A curated dialogue on India's economic journey toward 2047. Live on
             LinkedIn & X Space. Published on YouTube.
           </p>
+
           <p
+            class="reveal reveal-delay-3"
             style="
               font-size: 0.88rem;
               color: var(--text-light);
@@ -3931,7 +4152,9 @@
             <strong style="color: var(--navy)">Partners:</strong> IndVest Forum
             NYC · India@2047
           </p>
+
           <p
+            class="reveal reveal-delay-4"
             style="
               font-size: 0.88rem;
               color: var(--text-light);
@@ -3944,10 +4167,11 @@
           </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container">
-          <div class="ins-grid rv">
-            <div class="ins-card">
+          <div class="ins-grid">
+            <div class="ins-card reveal">
               <p class="ins-tag">India Moment · Episode</p>
               <h4 class="ins-title">Capital Markets & SME Ecosystem</h4>
               <p class="ins-meta">
@@ -3973,7 +4197,8 @@
                 >Watch on YouTube →</a
               >
             </div>
-            <div class="ins-card">
+
+            <div class="ins-card reveal reveal-delay-1">
               <p class="ins-tag">India Moment · Episode</p>
               <h4 class="ins-title">Middle East Capital & India Corridor</h4>
               <p class="ins-meta">
@@ -3998,7 +4223,8 @@
                 >Watch on YouTube →</a
               >
             </div>
-            <div class="ins-card">
+
+            <div class="ins-card reveal reveal-delay-2">
               <p class="ins-tag">India Moment · Episode</p>
               <h4 class="ins-title">
                 India's Global Positioning: A Policy Lens
@@ -4026,7 +4252,8 @@
                 >Watch on YouTube →</a
               >
             </div>
-            <div class="ins-card">
+
+            <div class="ins-card reveal reveal-delay-3">
               <p class="ins-tag">India Moment · Episode</p>
               <h4 class="ins-title">Defence Tech & Venture Building</h4>
               <p class="ins-meta">
@@ -4057,17 +4284,20 @@
     </div>
 
     <!-- ==================== ABOUT ==================== -->
+    <!-- ==================== ABOUT ==================== -->
     <div class="page" id="pg-about">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">About</div>
-          <h2 class="sh">Operator-led. <em>Institution-ready.</em></h2>
+          <div class="ey reveal">About</div>
+          <h2 class="sh reveal reveal-delay-1">
+            Operator-led. <em>Institution-ready.</em>
+          </h2>
         </div>
       </section>
+
       <section style="padding: 40px 0; background: white">
         <div class="container" style="max-width: 800px">
-          <div class="rv">
+          <div class="reveal reveal-delay-2">
             <p
               style="
                 font-size: 1.05rem;
@@ -4088,7 +4318,9 @@
               college startup incubator for SPPU — our work spans every layer of
               the venture stack.
             </p>
+
             <div
+              class="about-cards"
               style="
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -4096,7 +4328,9 @@
                 margin-bottom: 40px;
               "
             >
+              <!-- Vision -->
               <div
+                class="reveal reveal-delay-3"
                 style="
                   padding: 24px;
                   border: 2px solid var(--teal);
@@ -4126,7 +4360,10 @@
                   institutional credibility.
                 </p>
               </div>
+
+              <!-- Mission -->
               <div
+                class="reveal reveal-delay-4"
                 style="
                   padding: 24px;
                   border: 2px solid var(--gold);
@@ -4160,11 +4397,14 @@
           </div>
         </div>
       </section>
+
+      <!-- TEAM -->
       <section class="team">
         <div class="container">
-          <div class="ey rv">Core Team</div>
-          <div class="team-grid rv">
-            <div class="tm-card">
+          <div class="ey reveal">Core Team</div>
+
+          <div class="team-grid">
+            <div class="tm-card reveal reveal-delay-1">
               <div class="tm-av">SD</div>
               <div>
                 <div class="tm-name">Shubham Dhoot</div>
@@ -4177,7 +4417,8 @@
                 </p>
               </div>
             </div>
-            <div class="tm-card">
+
+            <div class="tm-card reveal reveal-delay-2">
               <div class="tm-av">UJ</div>
               <div>
                 <div class="tm-name">Utsav Jasapara</div>
@@ -4191,15 +4432,19 @@
               </div>
             </div>
           </div>
-          <div class="tm-advs rv">
+
+          <!-- Advisory -->
+          <div class="tm-advs reveal reveal-delay-3">
             <span class="tm-advs-label">Advisory Board</span>
-            <span class="tm-pill">Ravi Karkara · USA</span
-            ><span class="tm-pill">CA Priyank Vora · Mumbai</span
-            ><span class="tm-pill">Rohit Kale</span
-            ><span class="tm-pill">Yash Sheth</span
-            ><span class="tm-pill">CA Shubham Laddha</span>
+            <span class="tm-pill">Ravi Karkara · USA</span>
+            <span class="tm-pill">CA Priyank Vora · Mumbai</span>
+            <span class="tm-pill">Rohit Kale</span>
+            <span class="tm-pill">Yash Sheth</span>
+            <span class="tm-pill">CA Shubham Laddha</span>
           </div>
-          <div class="rv">
+
+          <!-- Team placeholders -->
+          <div class="reveal reveal-delay-4">
             <h3
               style="
                 font-family: &quot;DM Serif Display&quot;, serif;
@@ -4211,6 +4456,7 @@
             >
               Our Team
             </h3>
+
             <p
               style="
                 font-size: 0.92rem;
@@ -4220,20 +4466,24 @@
             >
               Growing team of operators, analysts, and builders.
             </p>
+
             <div class="team-placeholder">
-              <div class="team-slot">
+              <div class="team-slot reveal">
                 <div class="team-slot__icon">+</div>
                 <div class="team-slot__label">Team Member</div>
               </div>
-              <div class="team-slot">
+
+              <div class="team-slot reveal reveal-delay-1">
                 <div class="team-slot__icon">+</div>
                 <div class="team-slot__label">Team Member</div>
               </div>
-              <div class="team-slot">
+
+              <div class="team-slot reveal reveal-delay-2">
                 <div class="team-slot__icon">+</div>
                 <div class="team-slot__label">Team Member</div>
               </div>
-              <div class="team-slot">
+
+              <div class="team-slot reveal reveal-delay-3">
                 <div class="team-slot__icon">+</div>
                 <div class="team-slot__label">Team Member</div>
               </div>
@@ -4244,44 +4494,47 @@
     </div>
 
     <!-- ==================== CAREERS ==================== -->
+    <!-- ==================== CAREERS ==================== -->
     <div class="page" id="pg-careers">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Careers</div>
-          <h2 class="sh">Build with <em>us.</em></h2>
-          <p class="sp">
+          <div class="ey reveal">Careers</div>
+          <h2 class="sh reveal reveal-delay-1">Build with <em>us.</em></h2>
+          <p class="sp reveal reveal-delay-2">
             We're looking for operators who want to build ventures, not just
             advise them.
           </p>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container">
-          <div class="form rv" style="max-width: 640px">
-            <div class="form-row">
+          <div class="form reveal reveal-delay-3" style="max-width: 640px">
+            <div class="form-row reveal">
               <div>
-                <label>Full Name *</label
-                ><input type="text" placeholder="Your name" />
+                <label>Full Name *</label>
+                <input type="text" placeholder="Your name" />
               </div>
               <div>
-                <label>Email *</label
-                ><input type="email" placeholder="you@email.com" />
-              </div>
-            </div>
-            <div class="form-row">
-              <div>
-                <label>Phone</label
-                ><input type="tel" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div>
-                <label>Location</label
-                ><input type="text" placeholder="Current city" />
+                <label>Email *</label>
+                <input type="email" placeholder="you@email.com" />
               </div>
             </div>
-            <div class="form-full">
-              <label>Area of Interest</label
-              ><select>
+
+            <div class="form-row reveal reveal-delay-1">
+              <div>
+                <label>Phone</label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div>
+                <label>Location</label>
+                <input type="text" placeholder="Current city" />
+              </div>
+            </div>
+
+            <div class="form-full reveal reveal-delay-2">
+              <label>Area of Interest</label>
+              <select>
                 <option>Finance & Capital Markets</option>
                 <option>Fundraising & Investor Relations</option>
                 <option>Startup Operations & GTM</option>
@@ -4292,10 +4545,11 @@
                 <option>Internship</option>
               </select>
             </div>
-            <div class="form-row">
+
+            <div class="form-row reveal reveal-delay-3">
               <div>
-                <label>Experience Level</label
-                ><select>
+                <label>Experience Level</label>
+                <select>
                   <option>0-2 years</option>
                   <option>2-5 years</option>
                   <option>5-10 years</option>
@@ -4303,8 +4557,8 @@
                 </select>
               </div>
               <div>
-                <label>Availability</label
-                ><select>
+                <label>Availability</label>
+                <select>
                   <option>Immediate</option>
                   <option>Within 1 month</option>
                   <option>Within 3 months</option>
@@ -4312,28 +4566,32 @@
                 </select>
               </div>
             </div>
-            <div class="form-full">
-              <label>LinkedIn Profile</label
-              ><input
+
+            <div class="form-full reveal reveal-delay-4">
+              <label>LinkedIn Profile</label>
+              <input
                 type="url"
                 placeholder="https://linkedin.com/in/yourprofile"
               />
             </div>
-            <div class="form-full">
-              <label>Why Startopreneur?</label
-              ><textarea
+
+            <div class="form-full reveal reveal-delay-4">
+              <label>Why Startopreneur?</label>
+              <textarea
                 placeholder="Tell us why you want to build ventures with us. What excites you about the full-stack studio model?"
               ></textarea>
             </div>
-            <div class="form-full">
-              <label>Resume / CV Link</label
-              ><input
+
+            <div class="form-full reveal reveal-delay-4">
+              <label>Resume / CV Link</label>
+              <input
                 type="url"
                 placeholder="Google Drive, Dropbox, or portfolio link"
               />
               <p class="form-note">Share a link to your resume or portfolio</p>
             </div>
-            <div class="form-submit">
+
+            <div class="form-submit reveal reveal-delay-4">
               <button
                 class="btn btn--p"
                 onclick="
@@ -4351,19 +4609,21 @@
     </div>
 
     <!-- ==================== CONTACT ==================== -->
+    <!-- ==================== CONTACT ==================== -->
     <div class="page" id="pg-contact">
-      <section class="pg-hero">
+      <section class="pg-hero reveal">
         <div class="container">
-          <span class="back" onclick="nav('home')">← Back</span>
-          <div class="ey">Let's Build</div>
-          <h2 class="sh">
+          <div class="ey reveal">Let's Build</div>
+          <h2 class="sh reveal reveal-delay-1">
             Work with India's Full-Stack<br /><em>Venture Studio.</em>
           </h2>
         </div>
       </section>
+
       <section style="padding: 40px 0 80px; background: white">
         <div class="container" style="max-width: 560px; text-align: center">
           <p
+            class="reveal reveal-delay-2"
             style="
               font-size: 1.05rem;
               color: var(--text-secondary);
@@ -4372,13 +4632,17 @@
           >
             Founders, companies, and investors.
           </p>
+
           <a
-            class="btn btn--p"
+            class="btn btn--p reveal reveal-delay-3"
             href="mailto:start@startopreneur.com"
             style="justify-content: center"
-            >start@startopreneur.com →</a
           >
+            start@startopreneur.com →
+          </a>
+
           <div
+            class="reveal reveal-delay-4"
             style="
               display: flex;
               gap: 24px;
@@ -4387,13 +4651,16 @@
               flex-wrap: wrap;
             "
           >
-            <span style="font-size: 0.95rem; color: var(--text-secondary)"
-              >🇮🇳 +91 7277 329 329</span
-            ><span style="font-size: 0.95rem; color: var(--text-secondary)"
-              >🇺🇸 +1 217 572 2176</span
-            >
+            <span style="font-size: 0.95rem; color: var(--text-secondary)">
+              🇮🇳 +91 7277 329 329
+            </span>
+            <span style="font-size: 0.95rem; color: var(--text-secondary)">
+              🇺🇸 +1 217 572 2176
+            </span>
           </div>
+
           <div
+            class="reveal reveal-delay-4"
             style="
               display: flex;
               gap: 48px;
@@ -4405,7 +4672,7 @@
               text-align: left;
             "
           >
-            <div>
+            <div class="reveal">
               <h4
                 style="
                   font-size: 0.88rem;
@@ -4424,11 +4691,12 @@
                   line-height: 1.6;
                 "
               >
-                04, Ambika Apt., Hare Krishna Mandir Marg,<br />Model Colony,
-                Shivaji Nagar, Pune – 411016
+                04, Ambika Apt., Hare Krishna Mandir Marg,<br />
+                Model Colony, Shivaji Nagar, Pune – 411016
               </p>
             </div>
-            <div>
+
+            <div class="reveal reveal-delay-1">
               <h4
                 style="
                   font-size: 0.88rem;
@@ -4447,14 +4715,14 @@
                   line-height: 1.6;
                 "
               >
-                8, The Green, STE A, Dover,<br />Kent, DE – 19901
+                8, The Green, STE A, Dover,<br />
+                Kent, DE – 19901
               </p>
             </div>
           </div>
         </div>
       </section>
     </div>
-
     <!-- FOOTER -->
     <footer class="footer reveal">
       <div class="container">
@@ -4563,20 +4831,63 @@
         mainNav.classList.toggle("nav--s", window.scrollY > 50),
       );
 
+      function resetRevealAnimations() {
+        document.querySelectorAll(".reveal, .eng-card").forEach((el) => {
+          el.classList.remove("is-visible");
+        });
+      }
+
+      function runRevealAnimations() {
+        const revealItems = document.querySelectorAll(".reveal");
+        const engineCards = document.querySelectorAll(".eng-card");
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.15,
+            rootMargin: "0px 0px -40px 0px",
+          },
+        );
+
+        revealItems.forEach((item) => observer.observe(item));
+        engineCards.forEach((card) => observer.observe(card));
+      }
+
       function nav(page, section) {
-        document
-          .querySelectorAll(".page")
-          .forEach((p) => p.classList.remove("active"));
+        document.querySelectorAll(".page").forEach((p) => {
+          p.classList.remove("active");
+        });
+
         const t = document.getElementById("pg-" + page);
+
         if (t) {
+          resetRevealAnimations();
           t.classList.add("active");
-          window.scrollTo(0, 0);
-          if (section)
-            setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "auto" });
+
+          if (typeof closeMobileMenu === "function") {
+            closeMobileMenu();
+          }
+
+          setTimeout(() => {
+            runRevealAnimations();
+
+            if (section) {
               const el = document.getElementById(section);
-              if (el) el.scrollIntoView({ behavior: "smooth" });
-            }, 150);
+              if (el) {
+                el.scrollIntoView({ behavior: "smooth" });
+              }
+            }
+          }, 80);
         }
+
         initRv();
       }
 
@@ -4605,37 +4916,41 @@
           obs.observe(el);
         });
       }
+
       initRv();
     </script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const revealItems = document.querySelectorAll(".reveal");
-        const engineCards = document.querySelectorAll(".eng-card");
-
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("is-visible");
-              }
-            });
-          },
-          {
-            threshold: 0.15,
-            rootMargin: "0px 0px -40px 0px",
-          },
-        );
-
-        revealItems.forEach((item) => observer.observe(item));
-        engineCards.forEach((card) => observer.observe(card));
+        runRevealAnimations();
       });
     </script>
     <script>
       const mobileMenuBtn = document.getElementById("mobileMenuBtn");
       const mobileMenuPanel = document.getElementById("mobileMenuPanel");
+      const studioMobileToggle = document.getElementById("studioMobileToggle");
+      const studioMobileSubmenu = document.getElementById(
+        "studioMobileSubmenu",
+      );
 
       function closeMobileMenu() {
         mobileMenuPanel.classList.remove("is-open");
+
+        if (studioMobileSubmenu && studioMobileToggle) {
+          studioMobileSubmenu.classList.remove("is-open");
+          studioMobileToggle.classList.remove("is-open");
+          studioMobileToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+
+      if (studioMobileToggle && studioMobileSubmenu) {
+        studioMobileToggle.addEventListener("click", () => {
+          const isOpen = studioMobileSubmenu.classList.toggle("is-open");
+          studioMobileToggle.classList.toggle("is-open");
+          studioMobileToggle.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false",
+          );
+        });
       }
 
       if (mobileMenuBtn && mobileMenuPanel) {
