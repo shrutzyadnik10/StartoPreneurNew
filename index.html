@@ -1982,7 +1982,7 @@
           width: 100%;
           padding-bottom: 12px;
           margin-bottom: 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: none;
         }
       }
       /* ===== ANIMATION BASE ===== */
@@ -2447,6 +2447,70 @@
           transition:
             opacity 0.65s ease,
             transform 0.65s ease;
+        }
+      }
+      /* hide mobile address on desktop */
+      .ft-mobile-addrs {
+        display: none;
+      }
+
+      /* MOBILE ONLY */
+      @media (max-width: 640px) {
+        /* show mobile address */
+        .ft-mobile-addrs {
+          display: block;
+          margin-top: 18px;
+        }
+
+        /* Address heading (yellow like other headings) */
+        .ft-mobile-heading {
+          font-size: 0.76rem;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          font-weight: 700;
+          color: var(--gold);
+          margin-bottom: 10px;
+        }
+
+        /* spacing between India / USA */
+        .ft-mobile-addr + .ft-mobile-addr {
+          margin-top: 14px;
+        }
+
+        /* country names (white strong) */
+        .ft-mobile-addr strong {
+          display: block;
+          font-size: 0.78rem;
+          color: white;
+          margin-bottom: 4px;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        /* address text */
+        .ft-mobile-addr p {
+          font-size: 0.84rem;
+          color: var(--text-light);
+          line-height: 1.7;
+          margin: 0;
+        }
+
+        /* remove bottom address block */
+        .ft-addrs {
+          display: none;
+          border-bottom: none !important;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        /* center copyright */
+        .ft-copy {
+          width: 100%;
+          text-align: center;
+        }
+
+        .ft-bottom {
+          align-items: center;
         }
       }
     </style>
@@ -4392,7 +4456,6 @@
     </div>
 
     <!-- FOOTER -->
-    <!-- FOOTER -->
     <footer class="footer reveal">
       <div class="container">
         <div class="ft-grid reveal reveal-delay-1">
@@ -4411,28 +4474,9 @@
             </p>
 
             <div class="ft-socials">
-              <a
-                class="ft-social"
-                href="https://www.linkedin.com/company/startopreneur360-innovations-private-limited/"
-                target="_blank"
-                rel="noopener"
-                >LinkedIn</a
-              >
-              <a
-                class="ft-social"
-                href="https://www.instagram.com/startopreneur__?igsh=MW52MTduMzg0a3lkYQ=="
-                target="_blank"
-                rel="noopener"
-                >Instagram</a
-              >
-              <a
-                class="ft-social"
-                href="https://www.youtube.com/@StartoPreneurIN"
-                target="_blank"
-                rel="noopener"
-              >
-                YouTube
-              </a>
+              <a class="ft-social" href="#" target="_blank">LinkedIn</a>
+              <a class="ft-social" href="#" target="_blank">Instagram</a>
+              <a class="ft-social" href="#" target="_blank">YouTube</a>
             </div>
           </div>
 
@@ -4461,12 +4505,35 @@
 
           <div class="reveal reveal-delay-4">
             <div class="ft-heading">Contact</div>
-            <a class="ft-link" href="mailto:start@startopreneur.com"
-              >start@startopreneur.com</a
+
+            <a class="ft-link" href="mailto:start@startopreneur.com">
+              start@startopreneur.com </a
             ><br />
-            <span class="ft-link" onclick="nav('contact')"
-              >Book a Conversation</span
-            >
+
+            <span class="ft-link" onclick="nav('contact')">
+              Book a Conversation
+            </span>
+
+            <!-- MOBILE ADDRESS -->
+            <div class="ft-mobile-addrs">
+              <div class="ft-mobile-heading">Address:</div>
+
+              <div class="ft-mobile-addr">
+                <strong>India</strong>
+                <p>
+                  04, Ambika Apt. Hare Krishna Mandir Marg,<br />
+                  Model Colony, Shivaji Nagar, Pune – 411016
+                </p>
+              </div>
+
+              <div class="ft-mobile-addr">
+                <strong>USA</strong>
+                <p>
+                  8, The Green, STE A, Dover,<br />
+                  Kent, DE – 19901
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -4475,6 +4542,7 @@
             © 2026 StartoPreneur360 Innovations Pvt. Ltd. All rights reserved.
           </div>
 
+          <!-- DESKTOP ADDRESS (unchanged) -->
           <div class="ft-addrs">
             <div class="ft-addr">
               <strong>India</strong>
