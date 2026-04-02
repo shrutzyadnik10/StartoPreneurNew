@@ -2411,6 +2411,44 @@
           animation-duration: 0.5s;
         }
       }
+      /* FOOTER REVEAL */
+      .footer.reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s ease,
+          transform 0.8s ease;
+        will-change: opacity, transform;
+      }
+
+      .footer.reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .footer .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition:
+          opacity 0.75s ease,
+          transform 0.75s ease;
+        will-change: opacity, transform;
+      }
+
+      .footer .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 640px) {
+        .footer.reveal,
+        .footer .reveal {
+          transform: translateY(22px);
+          transition:
+            opacity 0.65s ease,
+            transform 0.65s ease;
+        }
+      }
     </style>
   </head>
   <body>
@@ -4354,10 +4392,11 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
+    <!-- FOOTER -->
+    <footer class="footer reveal">
       <div class="container">
-        <div class="ft-grid">
-          <div>
+        <div class="ft-grid reveal reveal-delay-1">
+          <div class="reveal reveal-delay-1">
             <div class="ft-brand">
               <img
                 src="images/Startopreneur 360 Logo White.png"
@@ -4397,7 +4436,7 @@
             </div>
           </div>
 
-          <div>
+          <div class="reveal reveal-delay-2">
             <div class="ft-heading">Studio</div>
             <span class="ft-link" onclick="nav('portfolio')">Portfolio</span
             ><br />
@@ -4409,7 +4448,7 @@
             >
           </div>
 
-          <div>
+          <div class="reveal reveal-delay-3">
             <div class="ft-heading">Engage</div>
             <span class="ft-link" onclick="nav('diagnostics')">Diagnostics</span
             ><br />
@@ -4420,7 +4459,7 @@
             <span class="ft-link" onclick="nav('careers')">Careers</span>
           </div>
 
-          <div>
+          <div class="reveal reveal-delay-4">
             <div class="ft-heading">Contact</div>
             <a class="ft-link" href="mailto:start@startopreneur.com"
               >start@startopreneur.com</a
@@ -4431,7 +4470,7 @@
           </div>
         </div>
 
-        <div class="ft-bottom">
+        <div class="ft-bottom reveal reveal-delay-4">
           <div class="ft-copy">
             © 2026 StartoPreneur360 Innovations Pvt. Ltd. All rights reserved.
           </div>
