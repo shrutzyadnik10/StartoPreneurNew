@@ -86,7 +86,7 @@
         right: 0;
         z-index: 1000;
         transition: all var(--transition);
-        padding: 16px 0;
+        padding: 10px 0;
       }
       .nav--s {
         background: rgba(255, 255, 255, 0.95);
@@ -112,6 +112,7 @@
         color: var(--navy);
         letter-spacing: -0.5px;
         cursor: pointer;
+        line-height: 1;
       }
       .nav__logo-icon {
         width: 36px;
@@ -1735,11 +1736,12 @@
         }
       }
       .nav__logo-img {
-        height: 42px; /* desktop size */
+        height: clamp(32px, 5vw, 42px);
         width: auto;
         max-width: 240px; /* prevents oversized logo */
         object-fit: contain;
         transition: all 0.3s ease;
+        display: block;
       }
       @media (max-width: 900px) {
         .nav__logo-img {
@@ -1752,11 +1754,14 @@
           height: 36px;
           max-width: 160px;
         }
+        .nav {
+          padding: 8px 0;
+        }
       }
       @media (max-width: 420px) {
         .nav__logo-img {
           height: 32px;
-          max-width: 140px;
+          max-width: 200px;
         }
       }
       .nav--s .nav__logo-img {
