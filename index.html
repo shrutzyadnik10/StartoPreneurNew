@@ -742,21 +742,27 @@
         padding: 100px 0;
         background: white;
       }
+
       .why-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
       }
+
       .why-card {
         padding: 32px;
         background: var(--bg);
         border-radius: var(--radius);
         border-left: 4px solid var(--teal);
         transition: all var(--transition);
+        min-width: 0;
       }
+
       .why-card:hover {
         box-shadow: var(--shadow-md);
+        transform: translateY(-2px);
       }
+
       .why-vs {
         font-family: "JetBrains Mono", monospace;
         font-size: 0.72rem;
@@ -765,20 +771,77 @@
         text-transform: uppercase;
         color: var(--text-light);
         margin-bottom: 12px;
+        line-height: 1.5;
       }
+
       .why-them {
         font-size: 0.92rem;
         color: var(--text-secondary);
-        line-height: 1.6;
+        line-height: 1.7;
         margin-bottom: 12px;
       }
+
       .why-us {
         font-size: 0.95rem;
         color: var(--navy);
         font-weight: 500;
-        line-height: 1.6;
+        line-height: 1.7;
+      }
+      @media (max-width: 900px) {
+        .why {
+          padding: 72px 0;
+        }
+
+        .why-grid {
+          grid-template-columns: 1fr;
+          gap: 16px;
+        }
+
+        .why-card {
+          padding: 24px 20px;
+        }
+
+        .why-card[style*="grid-column: span 2"] {
+          grid-column: span 1 !important;
+        }
       }
 
+      @media (max-width: 640px) {
+        .why {
+          padding: 56px 0;
+        }
+
+        .why-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .why-card {
+          padding: 20px 16px;
+          border-radius: 16px;
+        }
+
+        .why-vs {
+          font-size: 0.68rem;
+          margin-bottom: 10px;
+        }
+
+        .why-them,
+        .why-us {
+          font-size: 0.88rem;
+          line-height: 1.65;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .why-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .why-card {
+          padding: 18px 14px;
+        }
+      }
       /* DIAG PREVIEW */
       .diag-preview {
         padding: 100px 0;
@@ -2198,6 +2261,40 @@
           line-height: 1.6;
         }
       }
+      .why-card.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.75s ease,
+    transform 0.75s ease,
+    box-shadow var(--transition);
+  will-change: opacity, transform;
+}
+
+.why-card.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.why-card.reveal:nth-child(1) {
+  transition-delay: 0.05s;
+}
+
+.why-card.reveal:nth-child(2) {
+  transition-delay: 0.12s;
+}
+
+.why-card.reveal:nth-child(3) {
+  transition-delay: 0.19s;
+}
+
+.why-card.reveal:nth-child(4) {
+  transition-delay: 0.26s;
+}
+
+.why-card.reveal:nth-child(5) {
+  transition-delay: 0.33s;
+}
     </style>
   </head>
   <body>
@@ -2441,15 +2538,15 @@
 
       <section class="why">
         <div class="container">
-          <div class="ey rv">Why We're Different</div>
-          <h2 class="sh rv">
+          <div class="ey reveal">Why We're Different</div>
+          <h2 class="sh reveal reveal-delay-1">
             Not a fund. Not a consultant. <em>Operators with equity.</em>
           </h2>
-          <p class="sp rv">
+          <p class="sp reveal reveal-delay-2">
             What sets the full-stack studio apart from the alternatives.
           </p>
-          <div class="why-grid rv">
-            <div class="why-card">
+          <div class="why-grid">
+            <div class="why-card reveal">
               <div class="why-vs">vs VC Funds</div>
               <p class="why-them">
                 Deploy capital. Don't build architecture or install systems.
@@ -2458,7 +2555,7 @@
                 We build before we capitalise. Equity earned through execution.
               </p>
             </div>
-            <div class="why-card">
+            <div class="why-card reveal">
               <div class="why-vs">vs Traditional Advisors</div>
               <p class="why-them">
                 Deliver a report. Collect a fee. Move on. No skin in the game.
@@ -2467,7 +2564,7 @@
                 We hold equity. Success fees align us with outcomes. We stay.
               </p>
             </div>
-            <div class="why-card">
+            <div class="why-card reveal">
               <div class="why-vs">vs Incubators</div>
               <p class="why-them">
                 Provide a desk and mentors. No financial infrastructure.
@@ -2477,7 +2574,7 @@
                 systems.
               </p>
             </div>
-            <div class="why-card">
+            <div class="why-card reveal">
               <div class="why-vs">vs Accelerators</div>
               <p class="why-them">
                 3-6 month programs. Time-bound. No post-fundraise coverage.
@@ -2486,7 +2583,7 @@
                 Our relationships are indefinite. Companies leave when ready.
               </p>
             </div>
-            <div class="why-card" style="grid-column: span 2">
+            <div class="why-card reveal" style="grid-column: span 2">
               <div class="why-vs">vs Consulting Firms</div>
               <p class="why-them">
                 Strategy decks. Premium fees. Don't build. Don't invest. Don't
