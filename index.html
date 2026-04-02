@@ -3173,6 +3173,20 @@
           transform: scale(1);
         }
       }
+      @media (max-width: 640px) {
+        /* ONLY target the address block (second flex div) */
+        #pg-contact .container > div[style*="gap: 48px"] {
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          justify-content: flex-start !important;
+          gap: 18px !important;
+          text-align: left !important;
+        }
+
+        #pg-contact .container > div[style*="gap: 48px"] > div {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -5231,7 +5245,6 @@
     </div>
 
     <!-- ==================== CONTACT ==================== -->
-    <!-- ==================== CONTACT ==================== -->
     <div class="page" id="pg-contact">
       <section class="pg-hero reveal">
         <div class="container">
@@ -5364,9 +5377,24 @@
             </p>
 
             <div class="ft-socials">
-              <a class="ft-social" href="#" target="_blank">LinkedIn</a>
-              <a class="ft-social" href="#" target="_blank">Instagram</a>
-              <a class="ft-social" href="#" target="_blank">YouTube</a>
+              <a
+                class="ft-social"
+                href="https://www.linkedin.com/company/startopreneur360-innovations-private-limited/"
+                target="_blank"
+                >LinkedIn</a
+              >
+              <a
+                class="ft-social"
+                href="https://www.instagram.com/startopreneur__/"
+                target="_blank"
+                >Instagram</a
+              >
+              <a
+                class="ft-social"
+                href="https://youtube.com/@startopreneurin?si=E1rq1qgdR5rK0cRU"
+                target="_blank"
+                >YouTube</a
+              >
             </div>
           </div>
 
