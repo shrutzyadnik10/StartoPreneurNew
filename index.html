@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Startopreneur360 — India's Full-Stack Venture Studio</title>
+  <title>StartoPreneur</title>
   <meta name="description"
     content="We build ventures. Finance them. Validate them. India's Full-Stack Venture Studio." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -3422,6 +3422,81 @@
         width: 100%;
       }
     }
+    .team-grid--expanded {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.tm-card--profile {
+  align-items: center;
+  transition: all var(--transition);
+}
+
+.tm-card--profile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(0, 176, 186, 0.22);
+}
+
+.tm-av--img {
+  width: 92px;
+  height: 92px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy), var(--teal));
+  flex-shrink: 0;
+}
+
+.tm-av--img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tm-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teal);
+  transition: all var(--transition);
+}
+
+.tm-link:hover {
+  color: var(--navy);
+  transform: translateX(2px);
+}
+
+@media (max-width: 900px) {
+  .team-grid--expanded {
+    grid-template-columns: 1fr !important;
+  }
+
+  .tm-card--profile {
+    grid-template-columns: 72px 1fr;
+    gap: 16px;
+    padding: 22px 18px;
+  }
+
+  .tm-av--img {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tm-card--profile {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .tm-av--img {
+    width: 78px;
+    height: 78px;
+  }
+}
   </style>
 </head>
 
@@ -3464,10 +3539,6 @@
               nav('about');
               closeMobileMenu();
             ">About</span>
-        <span class="nav__mobile-link" onclick="
-              nav('careers');
-              closeMobileMenu();
-            ">Careers</span>
 
         <button class="nav__mobile-cta" onclick="
               nav('contact');
@@ -3491,7 +3562,6 @@
         <span class="nav__link" onclick="nav('diagnostics')">Diagnostics</span>
         <span class="nav__link" onclick="nav('insights')">Insights</span>
         <span class="nav__link" onclick="nav('about')">About</span>
-        <span class="nav__link" onclick="nav('careers')">Careers</span>
         <button class="nav__cta" onclick="nav('contact')">
           Work With Us
         </button>
@@ -4057,7 +4127,6 @@
   </div>
 
   <!-- ==================== APPLY TO STUDIO (Universal Form) ==================== -->
-  <!-- ==================== APPLY TO STUDIO (Universal Form) ==================== -->
   <div class="page" id="pg-apply-studio">
     <section class="pg-hero reveal">
       <div class="container">
@@ -4071,160 +4140,87 @@
         </p>
       </div>
     </section>
-
-    <section style="padding: 40px 0 80px; background: white">
+ <section style="padding: 40px 0 80px; background: white">
       <div class="container">
-        <div class="form reveal reveal-delay-3">
-          <div class="form-full reveal">
-            <label>What are you looking for?</label>
-            <select id="formType" onchange="toggleFormFields()">
-              <option value="">Select engagement type</option>
-              <option value="studio">
-                Venture Studio Partnership (equity-led, we build alongside
-                you)
-              </option>
-              <option value="fundraise">
-                Fund Raise Mandate (we execute your fundraise)
-              </option>
-              <option value="advisory">
-                Advisory Engagement (fractional CFO, structuring, compliance)
-              </option>
-            </select>
-          </div>
-
-          <div class="form-row reveal reveal-delay-1">
+        <div class="form reveal reveal-delay-3" style="max-width: 640px">
+          <div class="form-row reveal">
             <div>
               <label>Full Name *</label>
               <input type="text" placeholder="Your name" />
             </div>
             <div>
               <label>Email *</label>
-              <input type="email" placeholder="you@company.com" />
+              <input type="email" placeholder="you@email.com" />
             </div>
           </div>
 
-          <div class="form-row reveal reveal-delay-2">
+          <div class="form-row reveal reveal-delay-1">
             <div>
               <label>Phone</label>
               <input type="tel" placeholder="+91 XXXXX XXXXX" />
             </div>
             <div>
-              <label>Company Name *</label>
-              <input type="text" placeholder="Your company" />
+              <label>Location</label>
+              <input type="text" placeholder="Current city" />
             </div>
+          </div>
+
+          <div class="form-full reveal reveal-delay-2">
+            <label>Area of Interest</label>
+            <select>
+              <option>Finance & Capital Markets</option>
+              <option>Fundraising & Investor Relations</option>
+              <option>Startup Operations & GTM</option>
+              <option>Legal & Compliance</option>
+              <option>Diagnostic Services & Analytics</option>
+              <option>Content & Brand</option>
+              <option>Technology & Product</option>
+              <option>Internship</option>
+            </select>
           </div>
 
           <div class="form-row reveal reveal-delay-3">
             <div>
-              <label>Sector</label>
-              <input type="text" placeholder="e.g. HealthTech, AgriTech, CleanTech" />
+              <label>Experience Level</label>
+              <select>
+                <option>0-2 years</option>
+                <option>2-5 years</option>
+                <option>5-10 years</option>
+                <option>10+ years</option>
+              </select>
             </div>
             <div>
-              <label>Location</label>
-              <input type="text" placeholder="City, Country" />
-            </div>
-          </div>
-
-          <div id="fields-studio" style="display: none">
-            <div class="form-row reveal reveal-delay-1">
-              <div>
-                <label>Stage</label>
-                <select>
-                  <option>Ideation</option>
-                  <option>MVP / Pre-Revenue</option>
-                  <option>Early Revenue</option>
-                  <option>Growth (₹1Cr+ ARR)</option>
-                </select>
-              </div>
-              <div>
-                <label>Are you open to equity partnership?</label>
-                <select>
-                  <option>Yes</option>
-                  <option>Open to discussion</option>
-                  <option>Not sure</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-full reveal reveal-delay-2">
-              <label>What problem does your venture solve?</label>
-              <textarea placeholder="Describe in 2-3 lines"></textarea>
-            </div>
-          </div>
-
-          <div id="fields-fundraise" style="display: none">
-            <div class="form-row reveal reveal-delay-1">
-              <div>
-                <label>Current Revenue (Annual)</label>
-                <select>
-                  <option>Pre-Revenue</option>
-                  <option>Under ₹1 Crore</option>
-                  <option>₹1-5 Crore</option>
-                  <option>₹5-25 Crore</option>
-                  <option>₹25+ Crore</option>
-                </select>
-              </div>
-              <div>
-                <label>Target Raise Amount</label>
-                <input type="text" placeholder="e.g. ₹10 Crore" />
-              </div>
-            </div>
-
-            <div class="form-row reveal reveal-delay-2">
-              <div>
-                <label>Round Type</label>
-                <select>
-                  <option>Seed</option>
-                  <option>Pre-Series A</option>
-                  <option>Series A</option>
-                  <option>Series B+</option>
-                  <option>Debt / NCD</option>
-                </select>
-              </div>
-              <div>
-                <label>Timeline</label>
-                <select>
-                  <option>Immediate (0-3 months)</option>
-                  <option>Near-term (3-6 months)</option>
-                  <option>Planning (6-12 months)</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div id="fields-advisory" style="display: none">
-            <div class="form-row reveal reveal-delay-1">
-              <div>
-                <label>Advisory Type</label>
-                <select>
-                  <option>Fractional CFO</option>
-                  <option>Transaction Structuring</option>
-                  <option>Post-IPO / SEBI Compliance</option>
-                  <option>Cross-Border Structuring</option>
-                  <option>Valuation</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div>
-                <label>Engagement Duration</label>
-                <select>
-                  <option>Project-based</option>
-                  <option>Retainer (monthly)</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
+              <label>Availability</label>
+              <select>
+                <option>Immediate</option>
+                <option>Within 1 month</option>
+                <option>Within 3 months</option>
+                <option>Open to discussion</option>
+              </select>
             </div>
           </div>
 
           <div class="form-full reveal reveal-delay-4">
-            <label>Anything else we should know?</label>
-            <textarea placeholder="Additional context, links, deck URL..."></textarea>
+            <label>LinkedIn Profile</label>
+            <input type="url" placeholder="https://linkedin.com/in/yourprofile" />
+          </div>
+
+          <div class="form-full reveal reveal-delay-4">
+            <label>Why Startopreneur?</label>
+            <textarea
+              placeholder="Tell us why you want to build ventures with us. What excites you about the full-stack studio model?"></textarea>
+          </div>
+
+          <div class="form-full reveal reveal-delay-4">
+            <label>Resume / CV Link</label>
+            <input type="url" placeholder="Google Drive, Dropbox, or portfolio link" />
+            <p class="form-note">Share a link to your resume or portfolio</p>
           </div>
 
           <div class="form-submit reveal reveal-delay-4">
             <button class="btn btn--p" onclick="
                   alert(
-                    'Thank you! We\'ll review your application and respond within 48 hours.',
+                    'Thank you for your interest! We\'ll review your application.',
                   )
                 ">
               Submit Application →
@@ -4233,6 +4229,7 @@
         </div>
       </div>
     </section>
+ 
   </div>
   <!-- ==================== INVESTOR INTEREST ==================== -->
   <div class="page" id="pg-investor-interest">
@@ -4988,200 +4985,112 @@
     </section>
 
     <!-- TEAM -->
-    <section class="team">
-      <div class="container">
-        <div class="ey reveal">Core Team</div>
+    <!-- TEAM -->
+<section class="team">
+  <div class="container">
+    <div class="ey reveal">Leadership & Advisors</div>
 
-        <div class="team-grid">
-          <div class="tm-card reveal reveal-delay-1">
-            <div class="tm-av">SD</div>
-            <div>
-              <div class="tm-name">Shubham Dhoot</div>
-              <div class="tm-role">Founder & CEO</div>
-              <p class="tm-bio">
-                Venture Capital professional.
-                <strong>Qualified Company Secretary.</strong> 10+ years in
-                deal structuring, fundraising execution, startup scale
-                readiness. VP – Fund Raising at TGISME Capital Advisors.
-              </p>
-            </div>
-          </div>
+    <h2 class="sh reveal reveal-delay-1" style="margin-bottom: 14px">
+      Meet the <em>Team</em>
+    </h2>
 
-          <div class="tm-card reveal reveal-delay-2">
-            <div class="tm-av">UJ</div>
-            <div>
-              <div class="tm-name">Utsav Jasapara</div>
-              <div class="tm-role">Co-Founder & CFO</div>
-              <p class="tm-bio">
-                <strong>FCA. CS (Professional). IICA.</strong> 10+ years in
-                startups & capital markets. Former Independent Director &
-                Audit Committee Chair, DroneAcharya (BSE listed). Advisory
-                CFO, The Return Journey.
-              </p>
-            </div>
-          </div>
+    <p class="sp reveal reveal-delay-2" style="max-width: 760px">
+      A finance-first leadership team and advisory network bringing together venture building, capital markets, governance, and growth expertise.
+    </p>
+
+    <div class="team-grid team-grid--expanded">
+      <div class="tm-card tm-card--profile reveal reveal-delay-1">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-1.png" alt="Shubham Dhoot" />
         </div>
-
-        <!-- Advisory -->
-        <div class="tm-advs reveal reveal-delay-3">
-          <span class="tm-advs-label">Advisory Board</span>
-          <span class="tm-pill">Ravi Karkara · USA</span>
-          <span class="tm-pill">CA Priyank Vora · Mumbai</span>
-          <span class="tm-pill">Rohit Kale</span>
-          <span class="tm-pill">Yash Sheth</span>
-          <span class="tm-pill">CA Shubham Laddha</span>
-        </div>
-
-        <!-- Team placeholders -->
-        <div class="reveal reveal-delay-4">
-          <h3 style="
-                font-family: &quot;DM Serif Display&quot;, serif;
-                font-size: 1.4rem;
-                color: var(--navy);
-                margin-top: 40px;
-                margin-bottom: 8px;
-              ">
-            Our Team
-          </h3>
-
-          <p style="
-                font-size: 0.92rem;
-                color: var(--text-secondary);
-                margin-bottom: 20px;
-              ">
-            Growing team of operators, analysts, and builders.
-          </p>
-
-          <div class="team-placeholder">
-            <div class="team-slot reveal">
-              <div class="team-slot__icon">+</div>
-              <div class="team-slot__label">Team Member</div>
-            </div>
-
-            <div class="team-slot reveal reveal-delay-1">
-              <div class="team-slot__icon">+</div>
-              <div class="team-slot__label">Team Member</div>
-            </div>
-
-            <div class="team-slot reveal reveal-delay-2">
-              <div class="team-slot__icon">+</div>
-              <div class="team-slot__label">Team Member</div>
-            </div>
-
-            <div class="team-slot reveal reveal-delay-3">
-              <div class="team-slot__icon">+</div>
-              <div class="team-slot__label">Team Member</div>
-            </div>
-          </div>
+        <div>
+          <div class="tm-name">Shubham Dhoot</div>
+          <div class="tm-role">Founder & CEO</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/shubham-dhoot-vc/" target="_blank" rel="noopener">LinkedIn Profile</a>
         </div>
       </div>
-    </section>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-2">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-2.png" alt="Utsav Jasapara" />
+        </div>
+        <div>
+          <div class="tm-name">Utsav Jasapara</div>
+          <div class="tm-role">Co-founder & CFO</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/utsav-jasapara-vc/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-3">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-3.png" alt="Ravi Karkara" />
+        </div>
+        <div>
+          <div class="tm-name">Ravi Karkara</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/ravikarkara/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-4">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-4.png" alt="CA Priyank Vora" />
+        </div>
+        <div>
+          <div class="tm-name">CA Priyank Vora</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/ca-priyankvora/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-1">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-5.png" alt="Rohit Kale" />
+        </div>
+        <div>
+          <div class="tm-name">Rohit Kale</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/rohitkalesdg/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-2">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-6.png" alt="Yash Sheth" />
+        </div>
+        <div>
+          <div class="tm-name">Yash Sheth</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/yashsheth/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-3">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-8.jpeg" alt="Sid Jain" />
+        </div>
+        <div>
+          <div class="tm-name">Sid Jain</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/sid-jain-58269b3/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+
+      <div class="tm-card tm-card--profile reveal reveal-delay-4">
+        <div class="tm-av tm-av--img">
+          <img src="images/avatar-7.png" alt="Shubham Laddha" />
+        </div>
+        <div>
+          <div class="tm-name">Shubham Laddha</div>
+          <div class="tm-role">Advisor</div>
+          <a class="tm-link" href="https://www.linkedin.com/in/ca-shubham-laddha-54896b130/" target="_blank" rel="noopener">LinkedIn Profile</a>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <!-- ==================== CAREERS ==================== -->
-  <!-- ==================== CAREERS ==================== -->
-  <div class="page" id="pg-careers">
-    <section class="pg-hero reveal">
-      <div class="container">
-        <div class="ey reveal">Careers</div>
-        <h2 class="sh reveal reveal-delay-1">Build with <em>us.</em></h2>
-        <p class="sp reveal reveal-delay-2">
-          We're looking for operators who want to build ventures, not just
-          advise them.
-        </p>
-      </div>
-    </section>
-
-    <section style="padding: 40px 0 80px; background: white">
-      <div class="container">
-        <div class="form reveal reveal-delay-3" style="max-width: 640px">
-          <div class="form-row reveal">
-            <div>
-              <label>Full Name *</label>
-              <input type="text" placeholder="Your name" />
-            </div>
-            <div>
-              <label>Email *</label>
-              <input type="email" placeholder="you@email.com" />
-            </div>
-          </div>
-
-          <div class="form-row reveal reveal-delay-1">
-            <div>
-              <label>Phone</label>
-              <input type="tel" placeholder="+91 XXXXX XXXXX" />
-            </div>
-            <div>
-              <label>Location</label>
-              <input type="text" placeholder="Current city" />
-            </div>
-          </div>
-
-          <div class="form-full reveal reveal-delay-2">
-            <label>Area of Interest</label>
-            <select>
-              <option>Finance & Capital Markets</option>
-              <option>Fundraising & Investor Relations</option>
-              <option>Startup Operations & GTM</option>
-              <option>Legal & Compliance</option>
-              <option>Diagnostic Services & Analytics</option>
-              <option>Content & Brand</option>
-              <option>Technology & Product</option>
-              <option>Internship</option>
-            </select>
-          </div>
-
-          <div class="form-row reveal reveal-delay-3">
-            <div>
-              <label>Experience Level</label>
-              <select>
-                <option>0-2 years</option>
-                <option>2-5 years</option>
-                <option>5-10 years</option>
-                <option>10+ years</option>
-              </select>
-            </div>
-            <div>
-              <label>Availability</label>
-              <select>
-                <option>Immediate</option>
-                <option>Within 1 month</option>
-                <option>Within 3 months</option>
-                <option>Open to discussion</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-full reveal reveal-delay-4">
-            <label>LinkedIn Profile</label>
-            <input type="url" placeholder="https://linkedin.com/in/yourprofile" />
-          </div>
-
-          <div class="form-full reveal reveal-delay-4">
-            <label>Why Startopreneur?</label>
-            <textarea
-              placeholder="Tell us why you want to build ventures with us. What excites you about the full-stack studio model?"></textarea>
-          </div>
-
-          <div class="form-full reveal reveal-delay-4">
-            <label>Resume / CV Link</label>
-            <input type="url" placeholder="Google Drive, Dropbox, or portfolio link" />
-            <p class="form-note">Share a link to your resume or portfolio</p>
-          </div>
-
-          <div class="form-submit reveal reveal-delay-4">
-            <button class="btn btn--p" onclick="
-                  alert(
-                    'Thank you for your interest! We\'ll review your application.',
-                  )
-                ">
-              Submit Application →
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
+</section>
   </div>
+ 
 
   <!-- ==================== CONTACT ==================== -->
   <div class="page" id="pg-contact">
@@ -5312,7 +5221,6 @@
           <span class="ft-link" onclick="nav('diagnostics')">Diagnostics</span><br />
           <span class="ft-link" onclick="nav('contact')">Work With Us</span><br />
           <span class="ft-link" onclick="nav('insights')">Insights</span><br />
-          <span class="ft-link" onclick="nav('careers')">Careers</span>
         </div>
 
         <div class="reveal reveal-delay-4">
